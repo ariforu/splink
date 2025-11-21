@@ -18,6 +18,7 @@ from splink.internals.settings_creator import SettingsCreator
 if TYPE_CHECKING:
     from splink.internals.duckdb.database_api import DuckDBAPI
     from splink.internals.spark.database_api import SparkAPI
+    from splink.internals.databricks_serverless.database_api import DatabricksAPI
 
 _LOWEST_SUPPORTED_MINOR_VERSION = 10
 
@@ -42,6 +43,10 @@ def __getattr__(name):
             from splink.internals.spark.database_api import SparkAPI
 
             return SparkAPI
+        elif name == "DatabricksAPI":
+            from splink.internals.databricks_serverless.database_api import DatabricksAPI
+
+            return DatabricksAPI
         elif name == "DuckDBAPI":
             from splink.internals.duckdb.database_api import DuckDBAPI
 
@@ -67,4 +72,5 @@ __all__ = [
     "SettingsCreator",
     "SparkAPI",
     "splink_datasets",
+    "DatabricksAPI"
 ]
